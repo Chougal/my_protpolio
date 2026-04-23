@@ -23,8 +23,17 @@ import {
   Calendar,
   BookOpen,
   Star,
+  Check,
   Zap,
 } from "lucide-react"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 // ===================== DATA =====================
 
@@ -116,30 +125,39 @@ const stats = [
   { label: "Technologies", value: "20+", icon: <Star size={20} />, color: "#ffa500" },
 ]
 
-const projects = [
+const products = [
   {
     id: 1,
     title: "E-Commerce Revolution",
     description: "A full-scale online shopping experience with real-time inventory and secure payments.",
+    fullDescription: "E-Commerce Revolution is a state-of-the-art platform designed for modern retailers. It features a blazing-fast frontend built with Next.js, a robust backend powered by Supabase, and a serverless architecture for ultimate scalability. Key features include real-time inventory tracking, multi-vendor support, AI-driven product recommendations, and integrated analytics dashboard.",
     tech: ["Next.js", "TypeScript", "Tailwind", "Supabase"],
     image: "/modern-office-dashboard.png",
     link: "#",
+    features: ["Real-time Inventory", "Secure Payment Gateway", "AI Recommendations", "Admin Dashboard"],
+    category: "Web Application"
   },
   {
     id: 2,
     title: "Smart Dairy Analytics",
     description: "IoT integrated dashboard for monitoring milk quality and collection efficiency.",
+    fullDescription: "Smart Dairy Analytics bridges the gap between traditional farming and modern technology. Using IoT sensors at collection points, it automatically records quality metrics, volume, and temperature. The platform provides dairy owners with real-time insights into production trends, farmer payouts, and distribution logistics through interactive charts and automated reporting.",
     tech: ["React", "Express", "MongoDB", "Chart.js"],
     image: "/modern-dairy-farm.png",
     link: "#",
+    features: ["IoT Integration", "Quality Monitoring", "Farmer Database", "Analytical Reporting"],
+    category: "Enterprise Solution"
   },
   {
     id: 3,
     title: "Jewellery Management Pro",
     description: "Inventory and billing system for high-end retail jewellery outlets.",
+    fullDescription: "Jewellery Management Pro is a specialized ERP solution for high-value retail. It handles intricate inventory management including gold weight, stone values, and making charges. The system includes advanced features like hallmarking tracking, customer loyalty programs, secure local-first data storage with Electron, and professional invoice generation.",
     tech: ["Electron", "Node.js", "SQLite"],
     image: "/jewelry-store-system.png",
     link: "#",
+    features: ["Gold Weight Tracking", "Professional Billing", "Hallmark Management", "Local-first Security"],
+    category: "Desktop Application"
   },
 ]
 
@@ -220,30 +238,85 @@ function SkillCard({ skill }: { skill: typeof skills[0] }) {
   )
 }
 
-// ===================== PROJECT CARD =====================
-function ProjectCard({ project }: { project: typeof projects[0] }) {
+// ===================== PRODUCT CARD =====================
+function ProductCard({ product }: { product: typeof products[0] }) {
   return (
-    <div className="glass-card group" style={{ overflow: "hidden", display: "flex", flexDirection: "column" }}>
-      <div style={{ position: "relative", height: "200px", background: "rgba(0,0,0,0.2)" }}>
-        <img 
-          src={project.image} 
-          alt={project.title} 
-          style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }}
-          className="group-hover:scale-110"
-        />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,10,15,0.8), transparent)" }} />
-        <div style={{ position: "absolute", bottom: "1rem", left: "1rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-           {project.tech.map(t => (
-             <span key={t} style={{ fontSize: "0.65rem", padding: "2px 8px", background: "rgba(255,255,255,0.1)", borderRadius: "4px", backdropFilter: "blur(4px)" }}>{t}</span>
-           ))}
+    <Dialog>
+      <div className="glass-card group" style={{ overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <div style={{ position: "relative", height: "200px", background: "rgba(0,0,0,0.2)" }}>
+          <img 
+            src={product.image} 
+            alt={product.title} 
+            style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }}
+            className="group-hover:scale-110"
+          />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,10,15,0.8), transparent)" }} />
+          <div style={{ position: "absolute", bottom: "1rem", left: "1rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+             {product.tech.map(t => (
+               <span key={t} style={{ fontSize: "0.65rem", padding: "2px 8px", background: "rgba(255,255,255,0.1)", borderRadius: "4px", backdropFilter: "blur(4px)" }}>{t}</span>
+             ))}
+          </div>
+        </div>
+        <div style={{ padding: "1.5rem", flex: 1, display: "flex", flexDirection: "column" }}>
+           <h4 style={{ fontSize: "1.2rem", fontWeight: 700, marginBottom: "0.5rem", fontFamily: "var(--font-space-grotesk), sans-serif" }}>{product.title}</h4>
+           <p style={{ fontSize: "0.9rem", color: "var(--muted-foreground)", marginBottom: "1.5rem", flex: 1 }}>{product.description}</p>
+           
+           <DialogTrigger asChild>
+             <button className="btn-outline" style={{ width: "100%", padding: "0.5rem" }}>View Details</button>
+           </DialogTrigger>
         </div>
       </div>
-      <div style={{ padding: "1.5rem", flex: 1, display: "flex", flexDirection: "column" }}>
-         <h4 style={{ fontSize: "1.2rem", fontWeight: 700, marginBottom: "0.5rem", fontFamily: "var(--font-space-grotesk), sans-serif" }}>{project.title}</h4>
-         <p style={{ fontSize: "0.9rem", color: "var(--muted-foreground)", marginBottom: "1.5rem", flex: 1 }}>{project.description}</p>
-         <button className="btn-outline" style={{ width: "100%", padding: "0.5rem" }}>View Project</button>
-      </div>
-    </div>
+
+      <DialogContent className="sm:max-w-[600px] bg-[#0a0a0f] border-white/10">
+        <DialogHeader>
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#6c63ff] bg-[#6c63ff]/10 px-2 py-1 rounded">
+              {product.category}
+            </span>
+          </div>
+          <DialogTitle className="text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+            {product.title}
+          </DialogTitle>
+          <DialogDescription className="text-gray-400 mt-2 line-height-relaxed">
+            {product.fullDescription}
+          </DialogDescription>
+        </DialogHeader>
+
+        <div className="grid gap-6 py-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <h4 className="text-sm font-semibold text-white/90">Technologies</h4>
+              <div className="flex flex-wrap gap-2">
+                {product.tech.map(t => (
+                  <span key={t} className="text-xs bg-white/5 border border-white/10 px-2 py-1 rounded text-gray-300">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="space-y-2">
+              <h4 className="text-sm font-semibold text-white/90">Key Features</h4>
+              <ul className="space-y-1">
+                {product.features.map(f => (
+                  <li key={f} className="text-xs text-gray-400 flex items-center gap-2">
+                    <Check size={12} className="text-[#6c63ff]" /> {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          
+          <div className="mt-4 pt-4 border-t border-white/5 flex gap-3">
+             <a href={product.link} className="btn-primary flex-1 justify-center py-2 text-sm">
+                Live Demo
+             </a>
+             <button className="btn-outline flex-1 justify-center py-2 text-sm">
+                Source Code
+             </button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   )
 }
 
@@ -463,7 +536,7 @@ export default function HomePage() {
           minHeight: "100vh",
           display: "flex",
           alignItems: "center",
-          paddingTop: "clamp(80px, 15vh, 120px)",
+          paddingTop: "clamp(120px, 20vh, 160px)",
           position: "relative",
           overflow: "hidden",
         }}
@@ -520,7 +593,7 @@ export default function HomePage() {
             {/* Name */}
             <h1
               style={{
-                fontSize: "clamp(2rem, 8vw, 4.5rem)",
+                fontSize: "clamp(1.75rem, 8vw, 4.5rem)",
                 fontWeight: 900,
                 lineHeight: 1.1,
                 marginBottom: "1rem",
@@ -577,8 +650,8 @@ export default function HomePage() {
               <a href="#contact" className="btn-primary" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                 <Mail size={18} /> Get In Touch
               </a>
-              <a href="#projects" className="btn-outline" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <Zap size={18} /> View Projects
+              <a href="#products" className="btn-outline" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <Zap size={18} /> View Products
               </a>
             </div>
 
@@ -624,7 +697,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <FloatingSocials customLinkedIn="https://www.linkedin.com/in/abhishek-chougale-573786268" customWhatsApp="9325519485" />
+          <FloatingSocials />
 
           {/* Right - Avatar */}
           <div
@@ -739,16 +812,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== PROJECTS SECTION ===== */}
-      <section id="projects" style={{ padding: "6rem 1.5rem" }}>
+      {/* ===== PRODUCTS SECTION ===== */}
+      <section id="products" style={{ padding: "6rem 1.5rem" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
             <p style={{ color: "#6c63ff", fontWeight: 600, fontSize: "0.9rem", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "0.75rem" }}>
-              My Works
+              My Offerings
             </p>
-            <h2 className="section-title">Featured <span className="gradient-text">Projects</span></h2>
+            <h2 className="section-title">Premium <span className="gradient-text">Products</span></h2>
             <div className="section-line" />
-            <p className="section-subtitle">Real-world applications and academic excellence</p>
+            <p className="section-subtitle">High-quality digital solutions for businesses and individuals</p>
           </div>
 
           <div 
@@ -758,9 +831,9 @@ export default function HomePage() {
               gap: "2.5rem" 
             }}
           >
-             {projects.map((proj, idx) => (
+             {products.map((prod, idx) => (
                 <div key={idx} style={{ animation: `fadeInUp 0.6s ease ${idx * 0.15}s both` }}>
-                   <ProjectCard project={proj} />
+                   <ProductCard product={prod} />
                 </div>
              ))}
           </div>
