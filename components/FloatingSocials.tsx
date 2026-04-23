@@ -3,7 +3,13 @@
 import { Github, Linkedin, MessageCircle, ArrowUp } from "lucide-react"
 import { useState, useEffect } from "react"
 
-export function FloatingSocials() {
+export function FloatingSocials({ 
+  customWhatsApp = "917066704913", 
+  customLinkedIn = "https://linkedin.com" 
+}: { 
+  customWhatsApp?: string;
+  customLinkedIn?: string;
+}) {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -28,7 +34,7 @@ export function FloatingSocials() {
   const socialLinks = [
     {
       icon: <Linkedin size={20} />,
-      href: "https://linkedin.com",
+      href: customLinkedIn,
       color: "#0077b5",
       label: "LinkedIn",
     },
@@ -40,7 +46,7 @@ export function FloatingSocials() {
     },
     {
       icon: <MessageCircle size={20} />,
-      href: "https://wa.me/917066704913",
+      href: `https://wa.me/${customWhatsApp.replace(/\+/g, '').replace(/\s+/g, '')}`,
       color: "#25d366",
       label: "WhatsApp",
     },

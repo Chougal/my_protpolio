@@ -33,10 +33,10 @@ export function Footer() {
                 marginBottom: "1rem",
               }}
             >
-              Rutuja.dev
+              Abhishek.dev
             </div>
             <p style={{ color: "var(--muted-foreground)", fontSize: "0.9rem", lineHeight: 1.7, maxWidth: "280px" }}>
-              MCA Graduate & Full Stack Developer from Bamani, Maharashtra. Passionate about building elegant digital experiences.
+              MCA Student & Full Stack Developer from Tisangi, Maharashtra. Passionate about building elegant digital experiences.
             </p>
             {/* Social Links */}
             <div style={{ display: "flex", gap: "0.75rem", marginTop: "1.25rem" }}>
@@ -73,7 +73,7 @@ export function Footer() {
                 <Github size={18} />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/abhishek-chougale-573786268"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -105,7 +105,7 @@ export function Footer() {
                 <Linkedin size={18} />
               </a>
               <a
-                href="mailto:rutujarajarampatil2003@gmail.com"
+                href="mailto:abhishekchougale038@gmail.com"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -173,7 +173,7 @@ export function Footer() {
                       (e.currentTarget as HTMLElement).style.color = "var(--muted-foreground)"
                     }}
                   >
-                    <span style={{ color: "#6c63ff", fontSize: "0.7rem" }}>â–¶</span>
+                    <span style={{ color: "#6c63ff", fontSize: "0.7rem" }}>▶</span>
                     {link}
                   </a>
                 </li>
@@ -198,10 +198,10 @@ export function Footer() {
             </h3>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.8rem" }}>
               {[
-                { degree: "MCA", college: "D.Y. Patil College" },
+                { degree: "MCA", college: "D.Y. Patil College, Talsande" },
                 { degree: "BCA", college: "D.R. Mane College, Kagal" },
-                { degree: "12th", college: "D.R. Mane College, Kagal" },
-                { degree: "10th", college: "Sidhanerali Vidyalay and Junior College Sidhanerali" },
+                { degree: "12th", college: "M.H. Shine, Tisangi" },
+                { degree: "10th", college: "D.M. Patil, Tisangi" },
               ].map((edu) => (
                 <li key={edu.degree} style={{ display: "flex", flexDirection: "column", gap: "0.15rem" }}>
                   <span
@@ -242,7 +242,7 @@ export function Footer() {
               gap: "0.4rem",
             }}
           >
-            Â© {new Date().getFullYear()} Rutuja Rajaram Patil. Made with{" "}
+            © {new Date().getFullYear()} Abhishek Vishnu Chougale. Made with info.
             <Heart size={14} style={{ color: "#ff6584", fill: "#ff6584" }} /> in Maharashtra
           </p>
           <p style={{ color: "var(--muted-foreground)", fontSize: "0.85rem" }}>
@@ -253,4 +253,3 @@ export function Footer() {
     </footer>
   )
 }
-

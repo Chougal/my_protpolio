@@ -32,17 +32,17 @@ export const education = [
   {
     id: 1,
     degree: "Master of Computer Applications (MCA)",
-    institution: "D.Y. Patil College",
+    institution: "D.Y. Patil College, Talsande",
     year: "2023 - 2025",
     status: "Completed",
     icon: "🎓",
     color: "#6c63ff",
-    description: "Advanced studies in computer science, software engineering, and modern application development.",
+    description: "Advanced studies in computer science and modern application development.",
     details: [
       "Specialization in Full Stack Development",
       "Advanced Database Management Systems",
-      "Cloud Computing & Virtualization",
-      "Artificial Intelligence & Machine Learning basics",
+      "Cloud Computing Basics",
+      "Software Engineering excellence",
     ],
     grade: "Distinction",
     projects: ["E-Commerce Platform", "Real-time Chat App"],
@@ -55,19 +55,19 @@ export const education = [
     status: "Completed",
     icon: "🎓",
     color: "#ff6584",
-    description: "Foundation in programming, database management, networking, and software development.",
+    description: "Foundation in programming, database management, and software development.",
     details: [
-      "Object-Oriented Programming with Java & C++",
-      "Web Technologies (HTML, CSS, JS)",
-      "Software Engineering principles",
-      "Networking & Data Communication",
+      "Object-Oriented Programming (Java & C++)",
+      "Web Technologies",
+      "Data Structures",
+      "Networking concepts",
     ],
     grade: "First Class with Distinction",
   },
   {
     id: 3,
     degree: "12th Standard (HSC)",
-    institution: "D.R. Mane College, Kagal",
+    institution: "M.H. Shine, Tisangi",
     year: "2019 - 2020",
     status: "Completed",
     icon: "📚",
@@ -81,7 +81,7 @@ export const education = [
   {
     id: 4,
     degree: "11th Standard",
-    institution: "D.R. Mane College, Kagal",
+    institution: "M.H. Shine, Tisangi",
     year: "2018 - 2019",
     status: "Completed",
     icon: "📖",
@@ -92,7 +92,7 @@ export const education = [
   {
     id: 5,
     degree: "10th Standard (SSC)",
-    institution: "Sidhanerali Vidyalay and Junior College Sidhanerali",
+    institution: "D.M. Patil, Tisangi",
     year: "2017 - 2018",
     status: "Completed",
     icon: "🏫",
@@ -390,7 +390,7 @@ function ContactForm() {
           <input
             type="text"
             className="contact-input"
-            placeholder="Rutuja Patil"
+            placeholder="Abhishek Chougale"
             required
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -463,7 +463,7 @@ export default function HomePage() {
           minHeight: "100vh",
           display: "flex",
           alignItems: "center",
-          paddingTop: "80px",
+          paddingTop: "clamp(80px, 15vh, 120px)",
           position: "relative",
           overflow: "hidden",
         }}
@@ -471,33 +471,32 @@ export default function HomePage() {
         {/* Background Orbs */}
         <div
           className="orb orb-purple animate-float"
-          style={{ width: "500px", height: "500px", top: "-100px", right: "-100px" }}
+          style={{ width: "min(500px, 80vw)", height: "min(500px, 80vw)", top: "-100px", right: "-100px" }}
         />
         <div
           className="orb orb-pink"
-          style={{ width: "400px", height: "400px", bottom: "-50px", left: "-100px" }}
+          style={{ width: "min(400px, 70vw)", height: "min(400px, 70vw)", bottom: "-50px", left: "-100px" }}
         />
         <div
           className="orb orb-cyan"
-          style={{ width: "300px", height: "300px", top: "50%", left: "40%" }}
+          style={{ width: "min(300px, 60vw)", height: "min(300px, 60vw)", top: "50%", left: "40%" }}
         />
 
         <div
           style={{
             maxWidth: "1200px",
             margin: "0 auto",
-            padding: "4rem 1.5rem",
+            padding: "2rem 1.5rem",
             position: "relative",
             zIndex: 1,
             display: "grid",
-            gridTemplateColumns: "1fr auto",
             gap: "3rem",
             alignItems: "center",
           }}
           className="md:grid-cols-[1fr_auto] grid-cols-1"
         >
           {/* Left Content */}
-          <div className="animate-fade-in-up md:order-1 order-2">
+          <div className="animate-fade-in-up md:order-1 order-2 text-center md:text-left">
             {/* Badge */}
             <div
               style={{
@@ -521,23 +520,23 @@ export default function HomePage() {
             {/* Name */}
             <h1
               style={{
-                fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+                fontSize: "clamp(2rem, 8vw, 4.5rem)",
                 fontWeight: 900,
-                lineHeight: 1.05,
+                lineHeight: 1.1,
                 marginBottom: "1rem",
                 letterSpacing: "-0.02em",
               }}
             >
               Hi, I&apos;m{" "}
-              <span className="gradient-text">Rutuja</span>
+              <span className="gradient-text">Abhishek</span>
               <br />
-              <span style={{ color: "var(--foreground)" }}>Rajaram Patil</span>
+              <span style={{ color: "var(--foreground)" }}>Vishnu Chougale</span>
             </h1>
 
             {/* Typing Effect */}
             <div
               style={{
-                fontSize: "clamp(1.2rem, 3vw, 1.8rem)",
+                fontSize: "clamp(1.1rem, 4vw, 1.8rem)",
                 fontFamily: "var(--font-space-grotesk), sans-serif",
                 fontWeight: 600,
                 marginBottom: "1.5rem",
@@ -548,10 +547,10 @@ export default function HomePage() {
               <TypeWriter
                 words={[
                   "Full Stack Developer",
-                  "MCA Graduate",
-                  "React & Next.js Dev",
-                  "Problem Solver",
-                  "Tech Enthusiast",
+                  "MCA Student",
+                  "React & Next.js Expert",
+                  "MERN Stack Developer",
+                  "Product Designer",
                 ]}
               />
             </div>
@@ -560,30 +559,32 @@ export default function HomePage() {
             <p
               style={{
                 color: "var(--muted-foreground)",
-                fontSize: "1.05rem",
+                fontSize: "clamp(0.95rem, 2vw, 1.05rem)",
                 lineHeight: 1.8,
                 maxWidth: "580px",
                 marginBottom: "2.5rem",
+                marginLeft: "auto",
+                marginRight: "auto"
               }}
+              className="md:ml-0 md:mr-0"
             >
-              MCA graduate from D.Y. Patil College with a passion for building modern, 
-              scalable web applications. I craft elegant digital experiences with clean code 
-              and creative problem-solving.
+              Passionate developer with expertise in building modern, scalable web applications. 
+              Currently pursuing MCA with a focus on creating impactful digital solutions.
             </p>
 
             {/* CTA Buttons */}
-            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }} className="md:justify-start">
               <a href="#contact" className="btn-primary" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                 <Mail size={18} /> Get In Touch
               </a>
-              <a href="/resume.pdf" target="_blank" className="btn-outline" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <BookOpen size={18} /> View Resume
+              <a href="#projects" className="btn-outline" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <Zap size={18} /> View Projects
               </a>
             </div>
 
             {/* Social Links */}
-            <div style={{ display: "flex", gap: "1rem", marginTop: "2rem", alignItems: "center" }}>
-              <span style={{ color: "var(--muted-foreground)", fontSize: "0.85rem" }}>Find me on:</span>
+            <div style={{ display: "flex", gap: "1rem", marginTop: "2rem", alignItems: "center", justifyContent: "center" }} className="md:justify-start">
+              <span style={{ color: "var(--muted-foreground)", fontSize: "0.85rem" }}>Find me:</span>
               <a
                 href="https://github.com"
                 target="_blank"
@@ -594,7 +595,7 @@ export default function HomePage() {
                   gap: "0.4rem",
                   color: "var(--muted-foreground)",
                   textDecoration: "none",
-                  fontSize: "0.9rem",
+                  fontSize: "0.91rem",
                   transition: "color 0.2s ease",
                 }}
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#6c63ff")}
@@ -603,7 +604,7 @@ export default function HomePage() {
                 <Github size={18} /> GitHub
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/abhishek-chougale-573786268"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -612,7 +613,7 @@ export default function HomePage() {
                   gap: "0.4rem",
                   color: "var(--muted-foreground)",
                   textDecoration: "none",
-                  fontSize: "0.9rem",
+                  fontSize: "0.91rem",
                   transition: "color 0.2s ease",
                 }}
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#0077b5")}
@@ -623,22 +624,21 @@ export default function HomePage() {
             </div>
           </div>
 
-          <FloatingSocials />
+          <FloatingSocials customLinkedIn="https://www.linkedin.com/in/abhishek-chougale-573786268" customWhatsApp="9325519485" />
 
           {/* Right - Avatar */}
           <div
-            className="animate-float lg:block md:order-2 order-1"
-            style={{ position: "relative", flexShrink: 0 }}
+            className="animate-float md:order-2 order-1"
+            style={{ position: "relative", flexShrink: 0, margin: "0 auto" }}
           >
             <div
               className="animate-pulse-glow"
               style={{
-                width: "clamp(240px, 30vw, 320px)",
-                height: "clamp(240px, 30vw, 320px)",
+                width: "clamp(220px, 40vw, 320px)",
+                height: "clamp(220px, 40vw, 320px)",
                 borderRadius: "50%",
                 background: "linear-gradient(135deg, #6c63ff 0%, #ff6584 50%, #43d9ad 100%)",
                 padding: "4px",
-                margin: "0 auto"
               }}
             >
               <div
@@ -656,8 +656,8 @@ export default function HomePage() {
                 }}
               >
                 <img 
-                  src="/rutuja.jpg" 
-                  alt="Rutuja Patil" 
+                  src="/abhi.jpeg" 
+                  alt="Abhishek Chougale" 
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
@@ -665,54 +665,9 @@ export default function HomePage() {
                     if (fallback) fallback.style.display = 'flex';
                   }}
                 />
-                <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', position: 'absolute' }}>
+                <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', position: 'absolute', background: "var(--card)" }}>
                   👨‍💻
                 </div>
-              </div>
-            </div>
-            {/* Floating badges */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: "-10px",
-                left: "-20px",
-                background: "var(--card)",
-                border: "1px solid rgba(108,99,255,0.3)",
-                borderRadius: "12px",
-                padding: "0.6rem 1rem",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                boxShadow: "0 8px 24px rgba(108,99,255,0.2)",
-              }}
-              className="hidden sm:flex"
-            >
-              <span style={{ fontSize: "1.2rem" }}>🎓</span>
-              <div>
-                <div style={{ color: "var(--foreground)", fontWeight: 700, fontSize: "0.8rem" }}>MCA</div>
-                <div style={{ color: "var(--muted-foreground)", fontSize: "0.7rem" }}>Graduate</div>
-              </div>
-            </div>
-            <div
-              style={{
-                position: "absolute",
-                top: "20px",
-                right: "-30px",
-                background: "var(--card)",
-                border: "1px solid rgba(255,101,132,0.3)",
-                borderRadius: "12px",
-                padding: "0.6rem 1rem",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                boxShadow: "0 8px 24px rgba(255,101,132,0.2)",
-              }}
-              className="hidden sm:flex"
-            >
-              <span style={{ fontSize: "1.2rem" }}>💻</span>
-              <div>
-                <div style={{ color: "var(--foreground)", fontWeight: 700, fontSize: "0.8rem" }}>Full Stack</div>
-                <div style={{ color: "var(--muted-foreground)", fontSize: "0.7rem" }}>Developer</div>
               </div>
             </div>
           </div>
@@ -793,7 +748,7 @@ export default function HomePage() {
             </p>
             <h2 className="section-title">Featured <span className="gradient-text">Projects</span></h2>
             <div className="section-line" />
-            <p className="section-subtitle">A collection of my recent academic and personal development projects</p>
+            <p className="section-subtitle">Real-world applications and academic excellence</p>
           </div>
 
           <div 
@@ -822,7 +777,7 @@ export default function HomePage() {
             <h2 className="section-title">My <span style={{ background: "linear-gradient(135deg, #ff6584 0%, #6c63ff 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Education</span></h2>
             <div className="section-line" style={{ background: "linear-gradient(135deg, #ff6584 0%, #6c63ff 100%)" }} />
             <p className="section-subtitle">
-              Detailed breakdown of my educational milestones (Click cards for details)
+              Milestones of my academic and technical foundation
             </p>
           </div>
 
@@ -844,7 +799,7 @@ export default function HomePage() {
             <h2 className="section-title">Technical <span className="gradient-text-2">Skills</span></h2>
             <div className="section-line" style={{ background: "linear-gradient(135deg, #43d9ad 0%, #6c63ff 100%)" }} />
             <p className="section-subtitle">
-              Technologies and tools I&apos;ve mastered through my education and projects
+              Mastering the modern web stack and development tools
             </p>
           </div>
 
@@ -852,40 +807,6 @@ export default function HomePage() {
             {skills.map((skill) => (
               <SkillCard key={skill.category} skill={skill} />
             ))}
-          </div>
-
-          {/* Tech cloud */}
-          <div
-            className="glass-card"
-            style={{
-              marginTop: "2rem",
-              padding: "2rem",
-              textAlign: "center",
-            }}
-          >
-            <h3
-              style={{
-                fontFamily: "var(--font-space-grotesk), sans-serif",
-                fontSize: "1.1rem",
-                fontWeight: 700,
-                marginBottom: "1.25rem",
-                color: "var(--muted-foreground)",
-              }}
-            >
-              All Technologies
-            </h3>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem", justifyContent: "center" }}>
-              {[
-                "HTML5", "CSS3", "JavaScript", "TypeScript", "React.js", "Next.js",
-                "Node.js", "Express.js", "Python", "Java", "MySQL", "MongoDB",
-                "PostgreSQL", "Git", "GitHub", "REST API", "Bootstrap", "TailwindCSS",
-                "Firebase", "Docker", "Linux", "VS Code", "Postman",
-              ].map((tech) => (
-                <span key={tech} className="tech-tag">
-                  {tech}
-                </span>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -900,7 +821,7 @@ export default function HomePage() {
             <h2 className="section-title">Get In <span style={{ background: "linear-gradient(135deg, #ffa500 0%, #ff6584 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Touch</span></h2>
             <div className="section-line" style={{ background: "linear-gradient(135deg, #ffa500 0%, #ff6584 100%)" }} />
             <p className="section-subtitle">
-              Have a project in mind or want to collaborate? I&apos;d love to hear from you!
+              Have a project in mind? Reach out to me!
             </p>
           </div>
 
@@ -928,37 +849,23 @@ export default function HomePage() {
                 {
                   icon: <Mail size={20} />,
                   label: "Email",
-                  value: "rutujarajarampatil2003@gmail.com",
+                  value: "abhishekchougale038@gmail.com",
                   color: "#ff6584",
-                  href: "mailto:rutujarajarampatil2003@gmail.com",
+                  href: "mailto:abhishekchougale038@gmail.com",
                 },
                 {
                   icon: <Phone size={20} />,
                   label: "Phone",
-                  value: "+91 7066704913",
+                  value: "+91 9325519485",
                   color: "#6c63ff",
-                  href: "tel:+917066704913",
+                  href: "tel:+919325519485",
                 },
                 {
                   icon: <MapPin size={20} />,
                   label: "Location",
-                  value: "Bamani",
+                  value: "Tisangi, Maharashtra",
                   color: "#43d9ad",
                   href: null,
-                },
-                {
-                  icon: <Github size={20} />,
-                  label: "GitHub",
-                  value: "github.com",
-                  color: "#8888aa",
-                  href: "https://github.com",
-                },
-                {
-                  icon: <Linkedin size={20} />,
-                  label: "LinkedIn",
-                  value: "linkedin.com",
-                  color: "#0077b5",
-                  href: "https://linkedin.com",
                 },
               ].map((item) => (
                 <div
@@ -1025,9 +932,6 @@ export default function HomePage() {
               >
                 Send a Message
               </h3>
-              <p style={{ color: "var(--muted-foreground)", fontSize: "0.9rem", marginBottom: "1.75rem" }}>
-                Fill out the form and I&apos;ll get back to you as soon as possible.
-              </p>
               <ContactForm />
             </div>
           </div>
