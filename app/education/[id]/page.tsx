@@ -3,23 +3,30 @@
 import { useParams, useRouter } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { education } from "@/app/page"
+import { useLanguage } from "@/lib/language-context"
 import { ArrowLeft, GraduationCap, Calendar, MapPin, CheckCircle, BookOpen, Award } from "lucide-react"
 import Link from "next/link"
-import { motion } from "framer-motion"
 
 export default function EducationDetailPage() {
   const params = useParams()
   const router = useRouter()
+  const { t } = useLanguage()
   const id = Number(params?.id)
-  const edu = education.find((e) => e.id === id)
+  
+  const educationData = (t("data.education") as any[]).map((edu, index) => ({
+    ...edu,
+    icon: index < 2 ? "🎓" : index === 2 ? "📚" : index === 3 ? "📖" : "🏫",
+    color: index === 0 ? "#6c63ff" : index === 1 ? "#ff6584" : index === 2 ? "#43d9ad" : index === 3 ? "#ffa500" : "#ff4757"
+  }))
+
+  const edu = educationData.find((e) => e.id === id)
 
   if (!edu) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f] text-white">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--background)] text-[var(--foreground)]">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">404</h1>
-          <p className="mb-6">Education details not found.</p>
+          <p className="mb-6">{t("edu.notFound")}</p>
           <Link href="/" className="btn-primary">Back to Home</Link>
         </div>
       </div>
@@ -27,7 +34,7 @@ export default function EducationDetailPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0a0a0f] text-white selection:bg-[#6c63ff]/30">
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--primary)]/30">
       <Header />
 
       <div style={{ paddingTop: "100px", paddingBottom: "80px" }}>
@@ -47,9 +54,9 @@ export default function EducationDetailPage() {
               cursor: "pointer",
               fontSize: "1rem"
             }}
-            className="hover:text-white transition-colors"
+            className="hover:text-[var(--foreground)] transition-colors"
           >
-            <ArrowLeft size={18} /> Back
+            <ArrowLeft size={18} /> {t("edu.back")}
           </button>
 
           {/* Hero Header */}
@@ -109,7 +116,7 @@ export default function EducationDetailPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
               <section className="glass-card" style={{ padding: "2rem" }}>
                 <h3 style={{ fontSize: "1.25rem", fontWeight: 700, marginBottom: "1rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <BookOpen size={20} color={edu.color} /> Overview
+                  <BookOpen size={20} color={edu.color} /> {t("edu.overview")}
                 </h3>
                 <p style={{ color: "var(--muted-foreground)", lineHeight: 1.8 }}>
                   {edu.description}
@@ -118,9 +125,9 @@ export default function EducationDetailPage() {
 
               {edu.details && (
                 <section className="glass-card" style={{ padding: "2rem" }}>
-                  <h3 style={{ fontSize: "1.25rem", fontWeight: 700, marginBottom: "1.25rem" }}>Key Modules & Subjects</h3>
+                  <h3 style={{ fontSize: "1.25rem", fontWeight: 700, marginBottom: "1.25rem" }}>{t("edu.curriculum")}</h3>
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                    {edu.details.map((detail, i) => (
+                    {edu.details.map((detail: string, i: number) => (
                       <div key={i} style={{ display: "flex", alignItems: "start", gap: "0.75rem" }}>
                         <CheckCircle size={18} style={{ color: edu.color, marginTop: "0.2rem", flexShrink: 0 }} />
                         <span style={{ color: "rgba(255,255,255,0.8)" }}>{detail}</span>
@@ -135,9 +142,9 @@ export default function EducationDetailPage() {
             {edu.projects && (
               <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
                 <section className="glass-card" style={{ padding: "2rem", borderTop: `4px solid ${edu.color}` }}>
-                  <h3 style={{ fontSize: "1.25rem", fontWeight: 700, marginBottom: "1.5rem" }}>Academic Projects</h3>
+                  <h3 style={{ fontSize: "1.25rem", fontWeight: 700, marginBottom: "1.5rem" }}>{t("edu.academicProjects")}</h3>
                   <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                    {edu.projects.map((proj, i) => (
+                    {edu.projects.map((proj: string, i: number) => (
                       <div 
                         key={i} 
                         style={{ 
@@ -148,7 +155,7 @@ export default function EducationDetailPage() {
                         }}
                       >
                          <h4 style={{ fontWeight: 600, marginBottom: "0.25rem" }}>{proj}</h4>
-                         <p style={{ fontSize: "0.85rem", color: "var(--muted-foreground)" }}>Major project completed during the course duration.</p>
+                         <p style={{ fontSize: "0.85rem", color: "var(--muted-foreground)" }}>{t("edu.projectDescription")}</p>
                       </div>
                     ))}
                   </div>
@@ -163,7 +170,7 @@ export default function EducationDetailPage() {
                   }}
                 >
                    <Award size={48} style={{ color: edu.color, margin: "0 auto 1rem", opacity: 0.5 }} />
-                   <p style={{ fontWeight: 600 }}>Earned {edu.grade} in final examination.</p>
+                   <p style={{ fontWeight: 600 }}>{t("edu.earned")} {edu.grade} {t("edu.inFinal")}</p>
                 </div>
               </div>
             )}

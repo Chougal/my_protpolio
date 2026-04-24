@@ -10,7 +10,7 @@
   --card-foreground: #e8e8f0;
   --primary: #6c63ff;
   --primary-light: #8b85ff;
-  --primary-glow: rgba(108, 99, 255, 0.3);
+  --primary-glow: color-mix(in srgb, var(--primary) 30%, transparent);
   --secondary: #1e1e2e;
   --accent: #ff6584;
   --accent-glow: rgba(255, 101, 132, 0.3);
@@ -19,12 +19,26 @@
   --muted: #1a1a2e;
   --muted-foreground: #8888aa;
   --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(108, 99, 255, 0.5);
+  --border-hover: var(--primary);
   --radius: 1rem;
-  --gradient-1: linear-gradient(135deg, #6c63ff 0%, #ff6584 100%);
-  --gradient-2: linear-gradient(135deg, #43d9ad 0%, #6c63ff 100%);
+  --gradient-1: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  --gradient-2: linear-gradient(135deg, var(--cyan) 0%, var(--primary) 100%);
   --glass: rgba(255, 255, 255, 0.04);
   --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+.light {
+  --background: #fdfdff;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --secondary: #f1f5f9;
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+  --border: rgba(0, 0, 0, 0.06);
+  --glass: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --primary-glow: color-mix(in srgb, var(--primary) 15%, transparent);
 }
 
 @theme inline {

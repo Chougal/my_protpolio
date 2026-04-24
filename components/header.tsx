@@ -2,21 +2,25 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { useLanguage } from "@/lib/language-context"
+import { SettingsDialog } from "@/components/SettingsDialog"
 import { 
   Menu, X, Linkedin, Github, MessageCircle, 
   Home, User, GraduationCap, Briefcase, Cpu, Mail 
 } from "lucide-react"
 
-const navItems = [
-  { label: "Home", href: "#home", icon: <Home size={22} /> },
-  { label: "About", href: "#about", icon: <User size={22} /> },
-  { label: "Education", href: "#education", icon: <GraduationCap size={22} /> },
-  { label: "Projects", href: "#products", icon: <Briefcase size={22} /> },
-  { label: "Skills", href: "#skills", icon: <Cpu size={22} /> },
-  { label: "Contact", href: "#contact", icon: <Mail size={22} /> },
+const getNavItems = (t: (key: string) => string) => [
+  { label: t("nav.home"), href: "#home", icon: <Home size={22} /> },
+  { label: t("nav.about"), href: "#about", icon: <User size={22} /> },
+  { label: t("nav.education"), href: "#education", icon: <GraduationCap size={22} /> },
+  { label: t("nav.projects"), href: "#products", icon: <Briefcase size={22} /> },
+  { label: t("nav.skills"), href: "#skills", icon: <Cpu size={22} /> },
+  { label: t("nav.contact"), href: "#contact", icon: <Mail size={22} /> },
 ]
 
 export function Header() {
+  const { t } = useLanguage()
+  const navItems = getNavItems(t)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -48,10 +52,10 @@ export function Header() {
           zIndex: 100,
           transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
           background: scrolled || mobileMenuOpen
-            ? "rgba(10, 10, 15, 0.9)"
+            ? "var(--glass)"
             : "transparent",
           backdropFilter: scrolled || mobileMenuOpen ? "blur(25px)" : "none",
-          borderBottom: (scrolled || mobileMenuOpen) ? "1px solid rgba(255,255,255,0.05)" : "none",
+          borderBottom: (scrolled || mobileMenuOpen) ? "1px solid var(--border)" : "none",
         }}
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1.5rem" }}>
@@ -78,7 +82,7 @@ export function Header() {
               className="hover:bg-[rgba(108,99,255,0.2)] hover:border-[#6c63ff]/50 hover:scale-105 active:scale-95"
             >
               <Menu size={18} className="text-[#6c63ff]" />
-              <span>MENU</span>
+              <span>{t("nav.menu")}</span>
             </button>
 
             {/* Quick Actions - Right side */}
@@ -87,16 +91,17 @@ export function Header() {
                 <a href="https://linkedin.com/in/abhishek-chougale-573786268" target="_blank" rel="noopener noreferrer" style={{ color: "var(--muted-foreground)" }} className="hover:text-[#0077b5] transition-colors">
                   <Linkedin size={18} />
                 </a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" style={{ color: "var(--muted-foreground)" }} className="hover:text-white transition-colors">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" style={{ color: "var(--muted-foreground)" }} className="hover:text-[var(--foreground)] transition-colors">
                   <Github size={18} />
                 </a>
               </div>
+              <SettingsDialog />
               <a
                 href="#contact"
                 className="btn-primary"
                 style={{ padding: "0.45rem 1.2rem", fontSize: "0.85rem", borderRadius: "12px" }}
               >
-                Hire Me
+                {t("nav.contact")}
               </a>
             </div>
           </div>
@@ -110,7 +115,7 @@ export function Header() {
             left: 0,
             right: 0,
             bottom: 0,
-            background: "rgba(8, 8, 12, 0.98)",
+            background: "var(--background)",
             backdropFilter: "blur(40px)",
             zIndex: 150,
             display: "flex",
@@ -125,7 +130,7 @@ export function Header() {
           <div style={{ maxWidth: "1200px", width: "100%", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", height: "80px", padding: "0 1.5rem" }}>
              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                 <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#6c63ff", boxShadow: "0 0 10px #6c63ff" }}></div>
-                <span style={{ fontWeight: 700, fontSize: "1rem", color: "var(--muted-foreground)", letterSpacing: "0.1em", textTransform: "uppercase" }}>Navigation</span>
+                <span style={{ fontWeight: 700, fontSize: "1rem", color: "var(--muted-foreground)", letterSpacing: "0.1em", textTransform: "uppercase" }}>{t("nav.menu")}</span>
              </div>
              <button 
                onClick={() => setMobileMenuOpen(false)}
@@ -217,7 +222,7 @@ export function Header() {
                 }}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Let's Build Something
+                {t("nav.buildSomething")}
               </a>
             </div>
 

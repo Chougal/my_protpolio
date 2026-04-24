@@ -5,6 +5,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { FloatingSocials } from "@/components/FloatingSocials"
 import Link from "next/link"
+import { useLanguage } from "@/lib/language-context"
 import {
   GraduationCap,
   Mail,
@@ -37,129 +38,14 @@ import {
 
 // ===================== DATA =====================
 
-export const education = [
-  {
-    id: 1,
-    degree: "Master of Computer Applications (MCA)",
-    institution: "D.Y. Patil College, Talsande",
-    year: "2023 - 2025",
-    status: "Completed",
-    icon: "🎓",
-    color: "#6c63ff",
-    description: "Advanced studies in computer science and modern application development.",
-    details: [
-      "Specialization in Full Stack Development",
-      "Advanced Database Management Systems",
-      "Cloud Computing Basics",
-      "Software Engineering excellence",
-    ],
-    grade: "Distinction",
-    projects: ["E-Commerce Platform", "Real-time Chat App"],
-  },
-  {
-    id: 2,
-    degree: "Bachelor of Computer Applications (BCA)",
-    institution: "D.R. Mane College, Kagal",
-    year: "2020 - 2023",
-    status: "Completed",
-    icon: "🎓",
-    color: "#ff6584",
-    description: "Foundation in programming, database management, and software development.",
-    details: [
-      "Object-Oriented Programming (Java & C++)",
-      "Web Technologies",
-      "Data Structures",
-      "Networking concepts",
-    ],
-    grade: "First Class with Distinction",
-  },
-  {
-    id: 3,
-    degree: "12th Standard (HSC)",
-    institution: "M.H. Shine, Tisangi",
-    year: "2019 - 2020",
-    status: "Completed",
-    icon: "📚",
-    color: "#43d9ad",
-    description: "Higher Secondary Certificate from Maharashtra State Board.",
-    details: [
-      "Stream: Science",
-      "Focus on Information Technology & Mathematics",
-    ],
-  },
-  {
-    id: 4,
-    degree: "11th Standard",
-    institution: "M.H. Shine, Tisangi",
-    year: "2018 - 2019",
-    status: "Completed",
-    icon: "📖",
-    color: "#ffa500",
-    description: "Junior College from Maharashtra State Board.",
-    details: ["Academic excellence in Science subjects"],
-  },
-  {
-    id: 5,
-    degree: "10th Standard (SSC)",
-    institution: "D.M. Patil, Tisangi",
-    year: "2017 - 2018",
-    status: "Completed",
-    icon: "🏫",
-    color: "#ff4757",
-    description: "Secondary School Certificate from Maharashtra State Board.",
-    details: ["General subjects with strong performance in Technical studies"],
-  },
-]
+// Education, Skills, Stats, and Products data are now dynamically generated in HomePage using useLanguage()
 
-const skills = [
-  { category: "Frontend", icon: <Globe size={22} />, color: "#6c63ff", techs: ["HTML5", "CSS3", "JavaScript", "React.js", "Next.js", "TypeScript"] },
-  { category: "Backend", icon: <Code size={22} />, color: "#ff6584", techs: ["Node.js", "Express.js", "REST API", "Python", "Java"] },
-  { category: "Database", icon: <Database size={22} />, color: "#43d9ad", techs: ["MySQL", "MongoDB", "PostgreSQL", "Firebase"] },
-  { category: "Tools & Others", icon: <Cpu size={22} />, color: "#ffa500", techs: ["Git", "GitHub", "VS Code", "Postman", "Linux", "Docker"] },
-]
+// Skills data moved inside HomePage
 
-const stats = [
-  { label: "Years of Study", value: "7+", icon: <BookOpen size={20} />, color: "#6c63ff" },
-  { label: "Degrees Earned", value: "2", icon: <Award size={20} />, color: "#ff6584" },
-  { label: "Projects Built", value: "15+", icon: <Zap size={20} />, color: "#43d9ad" },
-  { label: "Technologies", value: "20+", icon: <Star size={20} />, color: "#ffa500" },
-]
+// Stats data moved inside HomePage
 
-const products = [
-  {
-    id: 1,
-    title: "E-Commerce Revolution",
-    description: "A full-scale online shopping experience with real-time inventory and secure payments.",
-    fullDescription: "E-Commerce Revolution is a state-of-the-art platform designed for modern retailers. It features a blazing-fast frontend built with Next.js, a robust backend powered by Supabase, and a serverless architecture for ultimate scalability. Key features include real-time inventory tracking, multi-vendor support, AI-driven product recommendations, and integrated analytics dashboard.",
-    tech: ["Next.js", "TypeScript", "Tailwind", "Supabase"],
-    image: "/modern-office-dashboard.png",
-    link: "#",
-    features: ["Real-time Inventory", "Secure Payment Gateway", "AI Recommendations", "Admin Dashboard"],
-    category: "Web Application"
-  },
-  {
-    id: 2,
-    title: "Smart Dairy Analytics",
-    description: "IoT integrated dashboard for monitoring milk quality and collection efficiency.",
-    fullDescription: "Smart Dairy Analytics bridges the gap between traditional farming and modern technology. Using IoT sensors at collection points, it automatically records quality metrics, volume, and temperature. The platform provides dairy owners with real-time insights into production trends, farmer payouts, and distribution logistics through interactive charts and automated reporting.",
-    tech: ["React", "Express", "MongoDB", "Chart.js"],
-    image: "/modern-dairy-farm.png",
-    link: "#",
-    features: ["IoT Integration", "Quality Monitoring", "Farmer Database", "Analytical Reporting"],
-    category: "Enterprise Solution"
-  },
-  {
-    id: 3,
-    title: "Jewellery Management Pro",
-    description: "Inventory and billing system for high-end retail jewellery outlets.",
-    fullDescription: "Jewellery Management Pro is a specialized ERP solution for high-value retail. It handles intricate inventory management including gold weight, stone values, and making charges. The system includes advanced features like hallmarking tracking, customer loyalty programs, secure local-first data storage with Electron, and professional invoice generation.",
-    tech: ["Electron", "Node.js", "SQLite"],
-    image: "/jewelry-store-system.png",
-    link: "#",
-    features: ["Gold Weight Tracking", "Professional Billing", "Hallmark Management", "Local-first Security"],
-    category: "Desktop Application"
-  },
-]
+// Products data moved inside HomePage
+// Final closing bracket fix
 
 // ===================== ANIMATED COUNTER =====================
 function AnimatedCounter({ value }: { value: string }) {
@@ -239,7 +125,8 @@ function SkillCard({ skill }: { skill: typeof skills[0] }) {
 }
 
 // ===================== PRODUCT CARD =====================
-function ProductCard({ product }: { product: typeof products[0] }) {
+function ProductCard({ product }: { product: any }) {
+  const { t } = useLanguage()
   return (
     <Dialog>
       <div className="glass-card group" style={{ overflow: "hidden", display: "flex", flexDirection: "column" }}>
@@ -250,10 +137,10 @@ function ProductCard({ product }: { product: typeof products[0] }) {
             style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }}
             className="group-hover:scale-110"
           />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,10,15,0.8), transparent)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--background), transparent)" }} />
           <div style={{ position: "absolute", bottom: "1rem", left: "1rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-             {product.tech.map(t => (
-               <span key={t} style={{ fontSize: "0.65rem", padding: "2px 8px", background: "rgba(255,255,255,0.1)", borderRadius: "4px", backdropFilter: "blur(4px)" }}>{t}</span>
+             {product.tech.map((techName: string) => (
+                <span key={techName} style={{ fontSize: "0.65rem", padding: "2px 8px", background: "rgba(255,255,255,0.1)", borderRadius: "4px", backdropFilter: "blur(4px)" }}>{techName}</span>
              ))}
           </div>
         </div>
@@ -262,12 +149,12 @@ function ProductCard({ product }: { product: typeof products[0] }) {
            <p style={{ fontSize: "0.9rem", color: "var(--muted-foreground)", marginBottom: "1.5rem", flex: 1 }}>{product.description}</p>
            
            <DialogTrigger asChild>
-             <button className="btn-outline" style={{ width: "100%", padding: "0.5rem" }}>View Details</button>
+             <button className="btn-outline" style={{ width: "100%", padding: "0.5rem" }}>{t("projects.viewDetails")}</button>
            </DialogTrigger>
         </div>
       </div>
 
-      <DialogContent className="sm:max-w-[600px] bg-[#0a0a0f] border-white/10">
+      <DialogContent className="sm:max-w-[600px] bg-[var(--background)] border-[var(--border)]">
         <DialogHeader>
           <div className="flex items-center gap-2 mb-2">
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#6c63ff] bg-[#6c63ff]/10 px-2 py-1 rounded">
@@ -285,33 +172,33 @@ function ProductCard({ product }: { product: typeof products[0] }) {
         <div className="grid gap-6 py-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <h4 className="text-sm font-semibold text-white/90">Technologies</h4>
+              <h4 className="text-sm font-semibold text-[var(--foreground)]">{t("projects.technologies")}</h4>
               <div className="flex flex-wrap gap-2">
-                {product.tech.map(t => (
-                  <span key={t} className="text-xs bg-white/5 border border-white/10 px-2 py-1 rounded text-gray-300">
+                {product.tech.map((t: string) => (
+                  <span key={t} className="text-xs bg-[var(--glass)] border border-[var(--border)] px-2 py-1 rounded text-[var(--foreground)]">
                     {t}
                   </span>
                 ))}
               </div>
             </div>
             <div className="space-y-2">
-              <h4 className="text-sm font-semibold text-white/90">Key Features</h4>
+              <h4 className="text-sm font-semibold text-[var(--foreground)]">{t("projects.features")}</h4>
               <ul className="space-y-1">
-                {product.features.map(f => (
+                {product.features.map((f: string) => (
                   <li key={f} className="text-xs text-gray-400 flex items-center gap-2">
-                    <Check size={12} className="text-[#6c63ff]" /> {f}
+                    <Check size={12} className="text-[var(--primary)]" /> {f}
                   </li>
                 ))}
               </ul>
             </div>
           </div>
           
-          <div className="mt-4 pt-4 border-t border-white/5 flex gap-3">
+          <div className="mt-4 pt-4 border-t border-[var(--border)] flex gap-3">
              <a href={product.link} className="btn-primary flex-1 justify-center py-2 text-sm">
-                Live Demo
+                {t("projects.liveDemo")}
              </a>
              <button className="btn-outline flex-1 justify-center py-2 text-sm">
-                Source Code
+                {t("projects.sourceCode")}
              </button>
           </div>
         </div>
@@ -321,7 +208,8 @@ function ProductCard({ product }: { product: typeof products[0] }) {
 }
 
 // ===================== EDUCATION CARD =====================
-function EducationCard({ edu, index }: { edu: typeof education[0]; index: number }) {
+function EducationCard({ edu, index, total }: { edu: any; index: number; total: number }) {
+  const { t } = useLanguage()
   return (
     <Link 
       href={`/education/${edu.id}`}
@@ -354,7 +242,7 @@ function EducationCard({ edu, index }: { edu: typeof education[0]; index: number
         >
           {edu.icon}
         </div>
-        {index < education.length - 1 && (
+        {index < total - 1 && (
           <div
             style={{
               width: "2px",
@@ -373,7 +261,7 @@ function EducationCard({ edu, index }: { edu: typeof education[0]; index: number
         style={{
           padding: "1.5rem",
           flex: 1,
-          marginBottom: index < education.length - 1 ? "1.25rem" : "0",
+          marginBottom: index < total - 1 ? "1.25rem" : "0",
           borderLeft: `3px solid ${edu.color}`,
           transition: "transform 0.3s ease, border-color 0.3s ease"
         }}
@@ -388,7 +276,7 @@ function EducationCard({ edu, index }: { edu: typeof education[0]; index: number
                 marginBottom: "0.3rem",
                 color: "var(--foreground)",
               }}
-              className="group-hover:text-[#6c63ff] transition-colors"
+              className="group-hover:text-[var(--primary)] transition-colors"
             >
               {edu.degree}
             </h3>
@@ -429,7 +317,7 @@ function EducationCard({ edu, index }: { edu: typeof education[0]; index: number
           {edu.description}
         </p>
         <div style={{ marginTop: "1rem", display: "flex", alignItems: "center", gap: "0.5rem", color: edu.color, fontSize: "0.85rem", fontWeight: 600, opacity: 0 }} className="group-hover:opacity-100 transition-opacity">
-           See Details <ArrowLeft size={14} style={{ transform: "rotate(180deg)" }} />
+           {t("edu.seeDetails")} <ArrowLeft size={14} style={{ transform: "rotate(180deg)" }} />
         </div>
       </div>
     </Link>
@@ -438,6 +326,7 @@ function EducationCard({ edu, index }: { edu: typeof education[0]; index: number
 
 // ===================== CONTACT FORM =====================
 function ContactForm() {
+  const { t } = useLanguage()
   const [form, setForm] = useState({ name: "", email: "", message: "" })
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
@@ -458,7 +347,7 @@ function ContactForm() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem" }}>
         <div>
           <label style={{ display: "block", color: "var(--muted-foreground)", fontSize: "0.85rem", marginBottom: "0.5rem", fontWeight: 500 }}>
-            Your Name *
+            {t("contact.name")} *
           </label>
           <input
             type="text"
@@ -471,7 +360,7 @@ function ContactForm() {
         </div>
         <div>
           <label style={{ display: "block", color: "var(--muted-foreground)", fontSize: "0.85rem", marginBottom: "0.5rem", fontWeight: 500 }}>
-            Email Address *
+            {t("contact.email")} *
           </label>
           <input
             type="email"
@@ -485,12 +374,12 @@ function ContactForm() {
       </div>
       <div>
         <label style={{ display: "block", color: "var(--muted-foreground)", fontSize: "0.85rem", marginBottom: "0.5rem", fontWeight: 500 }}>
-          Message *
+          {t("contact.message")} *
         </label>
         <textarea
           className="contact-input"
           rows={5}
-          placeholder="I'd love to collaborate on a project..."
+          placeholder="..."
           required
           value={form.message}
           onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -508,13 +397,13 @@ function ContactForm() {
         }}
       >
         {sent ? (
-          "✅ Message Sent!"
+          t("contact.sent")
         ) : sending ? (
-          "Sending..."
+          t("contact.sending")
         ) : (
           <>
             <Send size={16} />
-            Send Message
+            {t("contact.send")}
           </>
         )}
       </button>
@@ -524,6 +413,34 @@ function ContactForm() {
 
 // ===================== MAIN PAGE =====================
 export default function HomePage() {
+  const { t, language } = useLanguage()
+
+  const educationData = (t("data.education") as any[]).map((edu, index) => ({
+    ...edu,
+    icon: index < 2 ? "🎓" : index === 2 ? "📚" : index === 3 ? "📖" : "🏫",
+    color: index === 0 ? "#6c63ff" : index === 1 ? "#ff6584" : index === 2 ? "#43d9ad" : index === 3 ? "#ffa500" : "#ff4757"
+  }))
+
+  const productsData = (t("data.products") as any[]).map((prod, index) => ({
+    ...prod,
+    image: index === 0 ? "/modern-office-dashboard.png" : index === 1 ? "/modern-dairy-farm.png" : "/jewelry-store-system.png",
+    link: "#"
+  }))
+
+  const skillsData = [
+    { category: t("skills.frontend"), icon: <Globe size={22} />, color: "#6c63ff", techs: ["HTML5", "CSS3", "JavaScript", "React.js", "Next.js", "TypeScript"] },
+    { category: t("skills.backend"), icon: <Code size={22} />, color: "#ff6584", techs: ["Node.js", "Express.js", "REST API", "Python", "Java"] },
+    { category: t("skills.database"), icon: <Database size={22} />, color: "#43d9ad", techs: ["MySQL", "MongoDB", "PostgreSQL", "Firebase"] },
+    { category: t("skills.tools"), icon: <Cpu size={22} />, color: "#ffa500", techs: ["Git", "GitHub", "VS Code", "Postman", "Linux", "Docker"] },
+  ]
+
+  const statsData = [
+    { label: t("stats.years"), value: "7+", icon: <BookOpen size={20} />, color: "#6c63ff" },
+    { label: t("stats.degrees"), value: "2", icon: <Award size={20} />, color: "#ff6584" },
+    { label: t("stats.projects"), value: "15+", icon: <Zap size={20} />, color: "#43d9ad" },
+    { label: t("stats.tech"), value: "20+", icon: <Star size={20} />, color: "#ffa500" },
+  ]
+
   return (
     <div style={{ background: "var(--background)", minHeight: "100vh" }}>
       <Header />
@@ -587,7 +504,7 @@ export default function HomePage() {
               }}
             >
               <span style={{ fontSize: "0.7rem" }}>🟢</span>
-              Available for opportunities
+              {t("hero.available")}
             </div>
 
             {/* Name */}
@@ -600,7 +517,7 @@ export default function HomePage() {
                 letterSpacing: "-0.02em",
               }}
             >
-              Hi, I&apos;m{" "}
+              {t("hero.hi")}{" "}
               <span className="gradient-text">Abhishek</span>
               <br />
               <span style={{ color: "var(--foreground)" }}>Vishnu Chougale</span>
@@ -618,13 +535,8 @@ export default function HomePage() {
               }}
             >
               <TypeWriter
-                words={[
-                  "Full Stack Developer",
-                  "MCA Student",
-                  "React & Next.js Expert",
-                  "MERN Stack Developer",
-                  "Product Designer",
-                ]}
+                key={language}
+                words={t("hero.typewriter")}
               />
             </div>
 
@@ -641,23 +553,22 @@ export default function HomePage() {
               }}
               className="md:ml-0 md:mr-0"
             >
-              Passionate developer with expertise in building modern, scalable web applications. 
-              Currently pursuing MCA with a focus on creating impactful digital solutions.
+              {t("hero.description")}
             </p>
 
             {/* CTA Buttons */}
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }} className="md:justify-start">
               <a href="#contact" className="btn-primary" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <Mail size={18} /> Get In Touch
+                <Mail size={18} /> {t("hero.getInTouch")}
               </a>
               <a href="#products" className="btn-outline" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <Zap size={18} /> View Products
+                <Zap size={18} /> {t("hero.viewProducts")}
               </a>
             </div>
 
             {/* Social Links */}
             <div style={{ display: "flex", gap: "1rem", marginTop: "2rem", alignItems: "center", justifyContent: "center" }} className="md:justify-start">
-              <span style={{ color: "var(--muted-foreground)", fontSize: "0.85rem" }}>Find me:</span>
+              <span style={{ color: "var(--muted-foreground)", fontSize: "0.85rem" }}>{t("hero.findMe")}</span>
               <a
                 href="https://github.com"
                 target="_blank"
@@ -674,7 +585,7 @@ export default function HomePage() {
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#6c63ff")}
                 onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--muted-foreground)")}
               >
-                <Github size={18} /> GitHub
+                <Github size={18} /> {t("hero.github")}
               </a>
               <a
                 href="https://www.linkedin.com/in/abhishek-chougale-573786268"
@@ -692,7 +603,7 @@ export default function HomePage() {
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#0077b5")}
                 onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--muted-foreground)")}
               >
-                <Linkedin size={18} /> LinkedIn
+                <Linkedin size={18} /> {t("hero.linkedin")}
               </a>
             </div>
           </div>
@@ -769,7 +680,7 @@ export default function HomePage() {
       <section style={{ padding: "5rem 1.5rem", background: "rgba(12,12,20,0.6)" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1.5rem" }}>
-            {stats.map((stat) => (
+            {statsData.map((stat) => (
               <div
                 key={stat.label}
                 className="glass-card"
@@ -804,7 +715,10 @@ export default function HomePage() {
                   <AnimatedCounter value={stat.value} />
                 </div>
                 <div style={{ color: "var(--muted-foreground)", fontSize: "0.9rem", fontWeight: 500 }}>
-                  {stat.label}
+                  {stat.label === "Years of Study" ? t("stats.years") : 
+                   stat.label === "Degrees Earned" ? t("stats.degrees") :
+                   stat.label === "Projects Built" ? t("stats.projects") :
+                   stat.label === "Technologies" ? t("stats.tech") : stat.label}
                 </div>
               </div>
             ))}
@@ -819,9 +733,9 @@ export default function HomePage() {
             <p style={{ color: "#6c63ff", fontWeight: 600, fontSize: "0.9rem", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "0.75rem" }}>
               My Offerings
             </p>
-            <h2 className="section-title">Premium <span className="gradient-text">Products</span></h2>
+            <h2 className="section-title">{t("projects.title")}</h2>
             <div className="section-line" />
-            <p className="section-subtitle">High-quality digital solutions for businesses and individuals</p>
+            <p className="section-subtitle">{t("projects.subtitle")}</p>
           </div>
 
           <div 
@@ -831,7 +745,7 @@ export default function HomePage() {
               gap: "2.5rem" 
             }}
           >
-             {products.map((prod, idx) => (
+            {productsData.map((prod, idx) => (
                 <div key={idx} style={{ animation: `fadeInUp 0.6s ease ${idx * 0.15}s both` }}>
                    <ProductCard product={prod} />
                 </div>
@@ -847,16 +761,16 @@ export default function HomePage() {
             <p style={{ color: "#ff6584", fontWeight: 600, fontSize: "0.9rem", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "0.75rem" }}>
               Academic Journey
             </p>
-            <h2 className="section-title">My <span style={{ background: "linear-gradient(135deg, #ff6584 0%, #6c63ff 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Education</span></h2>
+            <h2 className="section-title">{t("education.title")}</h2>
             <div className="section-line" style={{ background: "linear-gradient(135deg, #ff6584 0%, #6c63ff 100%)" }} />
             <p className="section-subtitle">
-              Milestones of my academic and technical foundation
+              {t("education.subtitle")}
             </p>
           </div>
 
           <div style={{ maxWidth: "800px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "0" }}>
-            {education.map((edu, index) => (
-              <EducationCard key={edu.id} edu={edu} index={index} />
+            {educationData.map((edu, index) => (
+              <EducationCard key={edu.id} edu={edu} index={index} total={educationData.length} />
             ))}
           </div>
         </div>
@@ -869,15 +783,15 @@ export default function HomePage() {
             <p style={{ color: "#43d9ad", fontWeight: 600, fontSize: "0.9rem", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "0.75rem" }}>
               What I Know
             </p>
-            <h2 className="section-title">Technical <span className="gradient-text-2">Skills</span></h2>
+            <h2 className="section-title">{t("skills.title")}</h2>
             <div className="section-line" style={{ background: "linear-gradient(135deg, #43d9ad 0%, #6c63ff 100%)" }} />
             <p className="section-subtitle">
-              Mastering the modern web stack and development tools
+              {t("skills.subtitle")}
             </p>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
-            {skills.map((skill) => (
+            {skillsData.map((skill) => (
               <SkillCard key={skill.category} skill={skill} />
             ))}
           </div>
@@ -891,7 +805,7 @@ export default function HomePage() {
             <p style={{ color: "#ffa500", fontWeight: 600, fontSize: "0.9rem", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "0.75rem" }}>
               Let&apos;s Connect
             </p>
-            <h2 className="section-title">Get In <span style={{ background: "linear-gradient(135deg, #ffa500 0%, #ff6584 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Touch</span></h2>
+            <h2 className="section-title">{t("contact.title")}</h2>
             <div className="section-line" style={{ background: "linear-gradient(135deg, #ffa500 0%, #ff6584 100%)" }} />
             <p className="section-subtitle">
               Have a project in mind? Reach out to me!
@@ -921,21 +835,21 @@ export default function HomePage() {
               {[
                 {
                   icon: <Mail size={20} />,
-                  label: "Email",
+                  label: t("contact.email_label"),
                   value: "abhishekchougale038@gmail.com",
                   color: "#ff6584",
                   href: "mailto:abhishekchougale038@gmail.com",
                 },
                 {
                   icon: <Phone size={20} />,
-                  label: "Phone",
+                  label: t("contact.phone"),
                   value: "+91 9325519485",
                   color: "#6c63ff",
                   href: "tel:+919325519485",
                 },
                 {
                   icon: <MapPin size={20} />,
-                  label: "Location",
+                  label: t("contact.location"),
                   value: "Tisangi, Maharashtra",
                   color: "#43d9ad",
                   href: null,
@@ -1003,7 +917,7 @@ export default function HomePage() {
                   marginBottom: "0.5rem",
                 }}
               >
-                Send a Message
+                {t("contact.sendMessage")}
               </h3>
               <ContactForm />
             </div>

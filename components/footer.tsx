@@ -1,11 +1,14 @@
 import { Github, Linkedin, Mail, Heart } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
 
 export function Footer() {
+  const { t } = useLanguage()
+
   return (
     <footer
       style={{
-        background: "rgba(10, 10, 15, 0.98)",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
+        background: "var(--background)",
+        borderTop: "1px solid var(--border)",
         padding: "3rem 1.5rem 2rem",
       }}
     >
@@ -36,10 +39,11 @@ export function Footer() {
               Abhishek.dev
             </div>
             <p style={{ color: "var(--muted-foreground)", fontSize: "0.9rem", lineHeight: 1.7, maxWidth: "280px" }}>
-              MCA Student & Full Stack Developer from Tisangi, Maharashtra. Passionate about building elegant digital experiences.
+              {t("footer.description")}
             </p>
             {/* Social Links */}
             <div style={{ display: "flex", gap: "0.75rem", marginTop: "1.25rem" }}>
+              {/* ... same social links ... */}
               <a
                 href="https://github.com"
                 target="_blank"
@@ -56,18 +60,6 @@ export function Footer() {
                   color: "var(--muted-foreground)",
                   transition: "all 0.2s ease",
                   textDecoration: "none",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.color = "#6c63ff"
-                  el.style.borderColor = "rgba(108,99,255,0.5)"
-                  el.style.background = "rgba(108,99,255,0.1)"
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.color = "var(--muted-foreground)"
-                  el.style.borderColor = "var(--glass-border)"
-                  el.style.background = "var(--glass)"
                 }}
               >
                 <Github size={18} />
@@ -89,18 +81,6 @@ export function Footer() {
                   transition: "all 0.2s ease",
                   textDecoration: "none",
                 }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.color = "#0077b5"
-                  el.style.borderColor = "rgba(0,119,181,0.5)"
-                  el.style.background = "rgba(0,119,181,0.1)"
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.color = "var(--muted-foreground)"
-                  el.style.borderColor = "var(--glass-border)"
-                  el.style.background = "var(--glass)"
-                }}
               >
                 <Linkedin size={18} />
               </a>
@@ -118,18 +98,6 @@ export function Footer() {
                   color: "var(--muted-foreground)",
                   transition: "all 0.2s ease",
                   textDecoration: "none",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.color = "#ff6584"
-                  el.style.borderColor = "rgba(255,101,132,0.5)"
-                  el.style.background = "rgba(255,101,132,0.1)"
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.color = "var(--muted-foreground)"
-                  el.style.borderColor = "var(--glass-border)"
-                  el.style.background = "var(--glass)"
                 }}
               >
                 <Mail size={18} />
@@ -150,13 +118,13 @@ export function Footer() {
                 marginBottom: "1.25rem",
               }}
             >
-              Quick Links
+              {t("footer.quickLinks")}
             </h3>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-              {["Home", "About", "Education", "Skills", "Contact"].map((link) => (
-                <li key={link}>
+              {["nav.home", "nav.about", "nav.education", "nav.skills", "nav.contact"].map((key) => (
+                <li key={key}>
                   <a
-                    href={`#${link.toLowerCase()}`}
+                    href={`#${key.split(".")[1]}`}
                     style={{
                       color: "var(--muted-foreground)",
                       textDecoration: "none",
@@ -166,15 +134,9 @@ export function Footer() {
                       alignItems: "center",
                       gap: "0.5rem",
                     }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.color = "#6c63ff"
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.color = "var(--muted-foreground)"
-                    }}
                   >
                     <span style={{ color: "#6c63ff", fontSize: "0.7rem" }}>▶</span>
-                    {link}
+                    {t(key)}
                   </a>
                 </li>
               ))}
@@ -194,14 +156,14 @@ export function Footer() {
                 marginBottom: "1.25rem",
               }}
             >
-              Education
+              {t("nav.education")}
             </h3>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.8rem" }}>
               {[
-                { degree: "MCA", college: "D.Y. Patil College, Talsande" },
-                { degree: "BCA", college: "D.R. Mane College, Kagal" },
-                { degree: "12th", college: "M.H. Shine, Tisangi" },
-                { degree: "10th", college: "D.M. Patil, Tisangi" },
+                { degree: t("edu.mca"), college: t("edu.dyp") },
+                { degree: t("edu.bca"), college: t("edu.drm") },
+                { degree: t("edu.12th"), college: t("edu.mhs") },
+                { degree: t("edu.10th"), college: t("edu.dmp") },
               ].map((edu) => (
                 <li key={edu.degree} style={{ display: "flex", flexDirection: "column", gap: "0.15rem" }}>
                   <span
@@ -223,7 +185,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div
           style={{
-            borderTop: "1px solid rgba(255,255,255,0.06)",
+            borderTop: "1px solid var(--border)",
             paddingTop: "1.5rem",
             display: "flex",
             flexDirection: "row",
@@ -242,8 +204,8 @@ export function Footer() {
               gap: "0.4rem",
             }}
           >
-            © {new Date().getFullYear()} Abhishek Vishnu Chougale. Made with info.
-            <Heart size={14} style={{ color: "#ff6584", fill: "#ff6584" }} /> in Maharashtra
+            © {new Date().getFullYear()} Abhishek Vishnu Chougale. {t("footer.madeWith")}
+            <Heart size={14} style={{ color: "#ff6584", fill: "#ff6584" }} /> {t("footer.in")}
           </p>
           <p style={{ color: "var(--muted-foreground)", fontSize: "0.85rem" }}>
             Full Stack Developer

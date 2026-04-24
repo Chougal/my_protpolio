@@ -15,15 +15,18 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
 })
 
+import { LanguageProvider } from "@/lib/language-context"
+import { ThemeProvider } from "@/components/theme-provider"
+
 export const metadata: Metadata = {
-  title: "Rutuja Patil | Full Stack Developer",
+  title: "Abhishek Chougale | Full Stack Developer",
   description:
-    "Personal portfolio of Rutuja Rajaram Patil — MCA graduate, passionate full-stack developer from Maharashtra. Explore my education, skills, and projects.",
-  keywords: ["Rutuja Patil", "MCA", "Full Stack Developer", "Portfolio", "React", "Next.js"],
-  authors: [{ name: "Rutuja Rajaram Patil" }],
+    "Personal portfolio of Abhishek Vishnu Chougale — MCA student, passionate full-stack developer from Maharashtra. Explore my education, skills, and projects.",
+  keywords: ["Abhishek Chougale", "MCA", "Full Stack Developer", "Portfolio", "React", "Next.js"],
+  authors: [{ name: "Abhishek Vishnu Chougale" }],
   openGraph: {
-    title: "Rutuja Patil | Full Stack Developer",
-    description: "MCA graduate | Full Stack Developer | Maharashtra",
+    title: "Abhishek Chougale | Full Stack Developer",
+    description: "MCA Student | Full Stack Developer | Maharashtra",
     type: "website",
   },
 }
@@ -34,8 +37,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-      <body className="font-sans antialiased">{children}</body>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
+      <body className="font-sans antialiased">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
